@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timesheet by Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="utility-row">
+      <div class="utility-links">
+        <a href="#">Users <span class="badge">50</span></a>
+        <a href="#">Business units</a>
+        <a href="#">Departments</a>
+        <a href="#">Teams</a>
+        <a href="#">Projects</a>
+        <a href="#">Settings</a>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="header-brand" aria-label="Brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-text">
+          <span class="brand-sub">de heus</span>
+          <strong>TIME</strong>
+          <strong>SHEET</strong>
+        </div>
+      </div>
+
+      <nav class="main-nav" aria-label="Main">
+        <a class="active" href="#"><span class="nav-icon icon-calendar" aria-hidden="true"></span>Timesheet by Day</a>
+        <a href="#"><span class="nav-icon icon-overview" aria-hidden="true"></span>Timesheet Overview</a>
+        <a href="#"><span class="nav-icon icon-heart" aria-hidden="true"></span>Favourites</a>
+        <a href="#"><span class="nav-icon icon-report" aria-hidden="true"></span>Reports <span class="nav-caret" aria-hidden="true">&#9662;</span></a>
+      </nav>
+
+      <div class="profile-box">
+        <span class="profile-avatar" aria-hidden="true">&#9711;</span>
+        <div class="profile-text">
+          <span class="profile-label">Logged in as</span>
+          <strong>Shahi, Aabash</strong>
+        </div>
+        <button type="button" class="profile-menu" aria-label="Profile menu">&#8942;</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="page-title-row">
+        <h1>Timesheet by Day</h1>
+
+        <div class="top-actions">
+          <div class="quick-project">
+            <div class="select-wrap">
+              <select id="projectSelect" aria-label="Add project">
+                <option value="">Add project...</option>
+                <option value="SMP01|Sample Project - Internal Support">SMP01 - Sample Project - Internal Support</option>
+                <option value="SMP02|Sample Project - Client Meetings">SMP02 - Sample Project - Client Meetings</option>
+                <option value="SMP03|Sample Project - QA and Testing">SMP03 - Sample Project - QA and Testing</option>
+                <option value="SMP04|Sample Project - Documentation">SMP04 - Sample Project - Documentation</option>
+              </select>
+              <span class="caret" aria-hidden="true">&#9662;</span>
+            </div>
+            <button type="button" class="btn btn-add" id="addProjectBtn">Add Project</button>
+          </div>
+          <button type="button" class="btn btn-lock" id="submitLockBtn">Submit and Lock</button>
+        </div>
+      </div>
+
+      <p class="project-status" id="projectStatus" aria-live="polite"></p>
+
+      <div class="controls-row">
+        <div class="filters">
+          <div class="field-group year-field">
+            <label for="yearSelect">Date</label>
+            <div class="select-wrap">
+              <select id="yearSelect">
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+              <span class="caret" aria-hidden="true">&#9662;</span>
+            </div>
+          </div>
+
+          <div class="field-group week-field">
+            <label for="weekSelect">Week</label>
+            <div class="select-wrap">
+              <select id="weekSelect">
+                <option value="Week 25 (2026-06-15 to 2026-06-21)">Week 25 (2026-06-15 to 2026-06-21)</option>
+                <option value="Week 24 (2026-06-08 to 2026-06-14)">Week 24 (2026-06-08 to 2026-06-14)</option>
+                <option value="Week 23 (2026-06-01 to 2026-06-07)">Week 23 (2026-06-01 to 2026-06-07)</option>
+              </select>
+              <span class="caret" aria-hidden="true">&#9662;</span>
+            </div>
+          </div>
+
+          <div class="week-nav" role="group" aria-label="Week navigation">
+            <button type="button" class="icon-btn" aria-label="Previous week">&#8249;</button>
+            <button type="button" class="icon-btn" aria-label="Next week">&#8250;</button>
+          </div>
+        </div>
+
+        <div class="smart-tools">
+          <div class="field-group search-field">
+            <label for="projectFilter">Filter Projects</label>
+            <input id="projectFilter" type="search" placeholder="Search by code or name" />
+          </div>
+        </div>
+      </div>
+
+      <h2 id="heading">2026 - Week 25 (2026-06-15 to 2026-06-21)</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cost Code</th>
+              <th>Project Name</th>
+              <th><span>15</span><span>Mon</span></th>
+              <th><span>16</span><span>Tue</span></th>
+              <th><span>17</span><span>Wed</span></th>
+              <th><span>18</span><span>Thu</span></th>
+              <th><span>19</span><span>Fri</span></th>
+              <th><span>20</span><span>Sat</span></th>
+              <th><span>21</span><span>Sun</span></th>
+              <th>Total (hour)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="timesheetBody">
+            <tr data-row>
+              <td>10000</td>
+              <td>Sample Project Proshore</td>
+              <td class="hours-cell" data-day-index="0"></td>
+              <td class="hours-cell" data-day-index="1"></td>
+              <td class="hours-cell" data-day-index="2"></td>
+              <td class="hours-cell" data-day-index="3"></td>
+              <td class="hours-cell" data-day-index="4"></td>
+              <td class="hours-cell" data-day-index="5"></td>
+              <td class="hours-cell" data-day-index="6"></td>
+              <td class="row-total">0.00</td>
+              <td class="action-cell">
+                <div class="action-buttons">
+                  <button type="button" class="remove-btn" aria-label="Delete row" title="Delete row">&#128465;</button>
+                </div>
+              </td>
+            </tr>
+            <tr data-row>
+              <td>10001</td>
+              <td>Sample Project Bootcamp</td>
+              <td class="hours-cell" data-day-index="0"></td>
+              <td class="hours-cell" data-day-index="1"></td>
+              <td class="hours-cell" data-day-index="2"></td>
+              <td class="hours-cell" data-day-index="3"></td>
+              <td class="hours-cell" data-day-index="4"></td>
+              <td class="hours-cell" data-day-index="5"></td>
+              <td class="hours-cell" data-day-index="6"></td>
+              <td class="row-total">0.00</td>
+              <td class="action-cell">
+                <div class="action-buttons">
+                  <button type="button" class="remove-btn" aria-label="Delete row" title="Delete row">&#128465;</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><strong>Total</strong></td>
+              <td></td>
+              <td id="dayTotal0">0.00</td>
+              <td id="dayTotal1">0.00</td>
+              <td id="dayTotal2">0.00</td>
+              <td id="dayTotal3">0.00</td>
+              <td id="dayTotal4">0.00</td>
+              <td id="dayTotal5">0.00</td>
+              <td id="dayTotal6">0.00</td>
+              <td id="allTotal">0.00</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="bottom-controls">
+        <div class="field-group copy-field">
+          <label for="copyWeek">Copy from week:</label>
+          <div class="copy-row">
+            <div class="select-wrap">
+              <select id="copyWeek">
+                <option>Week 13 (2027-03-29 / 2027-04-04)</option>
+                <option>Week 12 (2027-03-22 / 2027-03-28)</option>
+              </select>
+              <span class="caret" aria-hidden="true">&#9662;</span>
+            </div>
+            <button type="button" class="btn btn-copy">COPY</button>
+          </div>
+        </div>
+        <div class="actions actions-inline">
+          <button type="button" class="btn btn-save">Save</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const yearSelect = document.getElementById("yearSelect");
+    const weekSelect = document.getElementById("weekSelect");
+    const heading = document.getElementById("heading");
+    const body = document.getElementById("timesheetBody");
+    const projectSelect = document.getElementById("projectSelect");
+    const addProjectBtn = document.getElementById("addProjectBtn");
+    const submitLockBtn = document.getElementById("submitLockBtn");
+    const saveBtn = document.querySelector(".btn-save");
+    const copyBtn = document.querySelector(".btn-copy");
+    const copyWeekSelect = document.getElementById("copyWeek");
+    const weekNavButtons = [...document.querySelectorAll(".week-nav .icon-btn")];
+    const projectStatus = document.getElementById("projectStatus");
+    const projectFilter = document.getElementById("projectFilter");
+    const MAX_DAY_HOURS = 24;
+    const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    let isLocked = false;
+
+    function setProjectStatus(message, type = "ok") {
+      projectStatus.textContent = message;
+      projectStatus.classList.remove("error", "ok", "warn");
+      if (message) projectStatus.classList.add(type);
+    }
+
+    function setTimesheetLocked(locked) {
+      isLocked = locked;
+      const lockTargets = [
+        yearSelect,
+        weekSelect,
+        projectSelect,
+        addProjectBtn,
+        copyWeekSelect,
+        copyBtn,
+        saveBtn,
+        ...weekNavButtons,
+        ...document.querySelectorAll(".hours-input, .mini-btn, .remove-btn")
+      ].filter(Boolean);
+
+      lockTargets.forEach((el) => {
+        el.disabled = locked;
+      });
+
+      document.querySelector(".panel")?.classList.toggle("is-locked", locked);
+      submitLockBtn.textContent = locked ? "Unlock" : "Submit and Lock";
+
+      if (locked) {
+        setProjectStatus("Timesheet locked. Add/Copy/Edit are disabled until you unlock.", "warn");
+      } else {
+        setProjectStatus("Timesheet unlocked. You can edit again.", "ok");
+      }
+    }
+
+    function renderHeading() {
+      const weekLabel = weekSelect.value.replace(/\s*\/\s*/g, " to ");
+      heading.textContent = `${yearSelect.value} - ${weekLabel}`;
+    }
+
+    function clampHour(value) {
+      const parsed = Number.isFinite(value) ? value : 0;
+      const snapped = Math.round(parsed * 4) / 4;
+      return Math.max(0, Math.min(24, snapped));
+    }
+
+    function formatHour(value) {
+      return Number.isInteger(value) ? String(value) : value.toFixed(2).replace(/\.?0+$/, "");
+    }
+
+    function getDayIndexFromInput(input) {
+      const cell = input.closest(".hours-cell");
+      return Number(cell?.getAttribute("data-day-index") ?? -1);
+    }
+
+    function getDayTotal(dayIndex, excludeInput = null) {
+      let total = 0;
+      body.querySelectorAll(`.hours-cell[data-day-index="${dayIndex}"] .hours-input`).forEach((input) => {
+        if (excludeInput && input === excludeInput) return;
+        total += clampHour(Number(input.value));
+      });
+      return total;
+    }
+
+    function setInputValueWithLimit(input, requestedValue, showWarning = true) {
+      const dayIndex = getDayIndexFromInput(input);
+      if (dayIndex < 0) return false;
+
+      const target = clampHour(requestedValue);
+      const remaining = Math.max(0, MAX_DAY_HOURS - getDayTotal(dayIndex, input));
+      const applied = Math.min(target, remaining);
+      const capped = applied < target;
+
+      input.value = formatHour(applied);
+
+      if (capped && showWarning) {
+        setProjectStatus(`${dayNames[dayIndex]} is capped at ${MAX_DAY_HOURS}h across all projects.`, "warn");
+      }
+
+      return capped;
+    }
+
+    function createEditor(dayIndex) {
+      const wrap = document.createElement("div");
+      wrap.className = "cell-editor";
+      wrap.innerHTML = `
+        <input class="hours-input" type="number" min="0" max="24" step="0.25" value="0" aria-label="Hours for day ${dayIndex}" />
+        <div class="step-buttons">
+          <button type="button" class="mini-btn plus" aria-label="Increase">+</button>
+          <button type="button" class="mini-btn minus" aria-label="Decrease">-</button>
+        </div>
+      `;
+      return wrap;
+    }
+
+    function hydrateRow(row) {
+      row.querySelectorAll(".hours-cell").forEach((cell) => {
+        if (!cell.querySelector(".cell-editor")) {
+          const dayIndex = Number(cell.getAttribute("data-day-index")) + 1;
+          cell.appendChild(createEditor(dayIndex));
+        }
+      });
+    }
+
+    function createRow(costCode, projectName) {
+      const row = document.createElement("tr");
+      row.setAttribute("data-row", "");
+      row.innerHTML = `
+        <td>${costCode}</td>
+        <td>${projectName}</td>
+        <td class="hours-cell" data-day-index="0"></td>
+        <td class="hours-cell" data-day-index="1"></td>
+        <td class="hours-cell" data-day-index="2"></td>
+        <td class="hours-cell" data-day-index="3"></td>
+        <td class="hours-cell" data-day-index="4"></td>
+        <td class="hours-cell" data-day-index="5"></td>
+        <td class="hours-cell" data-day-index="6"></td>
+        <td class="row-total">0.00</td>
+        <td class="action-cell">
+          <div class="action-buttons">
+            <button type="button" class="remove-btn" aria-label="Delete row" title="Delete row">&#128465;</button>
+          </div>
+        </td>
+      `;
+      hydrateRow(row);
+      return row;
+    }
+
+    function getRowValues(row) {
+      return [...row.querySelectorAll(".hours-input")].map((input) => clampHour(Number(input.value)));
+    }
+
+    function updateTotals() {
+      const rows = [...body.querySelectorAll("tr[data-row]")];
+      const dayTotals = Array(7).fill(0);
+      let allTotal = 0;
+
+      rows.forEach((row) => {
+        const values = getRowValues(row);
+        const rowTotal = values.reduce((acc, current) => acc + current, 0);
+        row.querySelector(".row-total").textContent = rowTotal.toFixed(2);
+        allTotal += rowTotal;
+        values.forEach((value, idx) => {
+          dayTotals[idx] += value;
+        });
+      });
+
+      dayTotals.forEach((value, idx) => {
+        document.getElementById(`dayTotal${idx}`).textContent = value.toFixed(2);
+      });
+
+      document.getElementById("allTotal").textContent = allTotal.toFixed(2);
+    }
+
+    function filterRows(query) {
+      const term = query.trim().toLowerCase();
+      body.querySelectorAll("tr[data-row]").forEach((row) => {
+        const code = row.children[0].textContent.toLowerCase();
+        const name = row.children[1].textContent.toLowerCase();
+        const visible = !term || code.includes(term) || name.includes(term);
+        row.style.display = visible ? "" : "none";
+      });
+    }
+
+    function getVisibleRowCount() {
+      return [...body.querySelectorAll("tr[data-row]")].filter((row) => row.style.display !== "none").length;
+    }
+
+    body.querySelectorAll("tr[data-row]").forEach(hydrateRow);
+
+    body.addEventListener("click", (event) => {
+      if (isLocked) return;
+      const plus = event.target.closest(".plus");
+      const minus = event.target.closest(".minus");
+      const remove = event.target.closest(".remove-btn");
+
+      if (plus || minus) {
+        const editor = event.target.closest(".cell-editor");
+        const input = editor.querySelector(".hours-input");
+        const current = clampHour(Number(input.value));
+        const next = plus ? current + 0.25 : current - 0.25;
+        const capped = setInputValueWithLimit(input, next, true);
+        if (!capped) setProjectStatus("", "ok");
+        updateTotals();
+      }
+
+      if (remove) {
+        const row = remove.closest("tr[data-row]");
+        const code = row?.children?.[0]?.textContent?.trim() || "Project";
+
+        if (!row) {
+          setProjectStatus("Unable to delete project row.", "error");
+          return;
+        }
+
+        if (getVisibleRowCount() <= 1) {
+          setProjectStatus("At least one project row must remain.", "error");
+          return;
+        }
+
+        const confirmed = window.confirm(`Delete project ${code}?`);
+        if (!confirmed) return;
+
+        row.remove();
+        setProjectStatus(`${code} deleted from timesheet.`, "warn");
+        updateTotals();
+      }
+    });
+
+    body.addEventListener("input", (event) => {
+      if (isLocked) return;
+      if (!event.target.classList.contains("hours-input")) return;
+      if (event.target.value === "") return;
+      updateTotals();
+    });
+
+    body.addEventListener("change", (event) => {
+      if (isLocked) return;
+      if (!event.target.classList.contains("hours-input")) return;
+      const capped = setInputValueWithLimit(event.target, Number(event.target.value), true);
+      if (!capped) setProjectStatus("", "ok");
+      updateTotals();
+    });
+
+    addProjectBtn.addEventListener("click", () => {
+      if (isLocked) return;
+      if (!projectSelect.value) {
+        setProjectStatus("Select a project first.", "error");
+        return;
+      }
+
+      const [code, name] = projectSelect.value.split("|");
+      if (!code || !name) {
+        setProjectStatus("Selected project is invalid. Please choose again.", "error");
+        return;
+      }
+
+      const exists = [...body.querySelectorAll("tr[data-row] td:first-child")].some(
+        (td) => td.textContent.trim() === code
+      );
+
+      if (exists) {
+        setProjectStatus(`${code} is already in the list.`, "error");
+        return;
+      }
+
+      body.appendChild(createRow(code, name));
+      projectSelect.value = "";
+      setProjectStatus(`${code} added to timesheet.`, "ok");
+      filterRows(projectFilter.value);
+      updateTotals();
+    });
+
+    projectFilter.addEventListener("input", () => {
+      filterRows(projectFilter.value);
+    });
+
+    submitLockBtn.addEventListener("click", () => {
+      const message = isLocked
+        ? "Unlock timesheet to allow Add Project, Copy, and hour editing?"
+        : "Submit and lock timesheet? Add Project, Copy, and hour editing will be disabled.";
+      const confirmed = window.confirm(message);
+      if (!confirmed) return;
+      setTimesheetLocked(!isLocked);
+    });
+
+    yearSelect.addEventListener("change", renderHeading);
+    weekSelect.addEventListener("change", renderHeading);
+
+    renderHeading();
+    updateTotals();
+  </script>
+</body>
+</html>
